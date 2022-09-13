@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./scss/components/main.scss";
-import ProjectsView from "./components/views/ProjectsView";
-import SettingsView from "./components/views/SettingsView";
-import Menu from "./components/Menu";
-import ThirdView from "./components/views/ThirdView";
+import "../scss/components/main.scss";
+import ProjectsView from "./views/ProjectsView";
+import SettingsView from "./views/SettingsView";
+import Menu from "./Menu";
+import ThirdView from "./views/ThirdView";
 
-const App: React.FC = () => {
+const Main = () => {
   const [view, setView] = useState("Projects");
   return (
     <div className="main">
@@ -19,4 +19,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Main;

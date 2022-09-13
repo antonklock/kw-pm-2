@@ -1,0 +1,48 @@
+@use '../../globalVariables.scss';
+
+.topWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0px 0px 0px;
+    background-color: solid;
+}
+
+.topWrapper .topRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0px 30px 0px 30px;
+}
+
+.topWrapper .textField {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    padding: 0px 30px 0px 30px;
+}
+
+.topWrapper .button {
+    margin-left: 10px;
+}
+
+.filterBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 45px;
+}
+
+.projectItems{
+    overflow: auto;
+}
+
+.projectItem:first-child {
+    margin-top: 10px;
+}
+.projectItem:last-child {
+    margin-bottom: 10px;
+}
