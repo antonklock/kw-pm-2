@@ -1,10 +1,14 @@
-import React from "react";
 import { Button, TextField, Typography, Sheet } from "@mui/joy";
+import AddNewProject from "../AddNewProject";
 import ProjectItems from "../ProjectItems";
 import "../../scss/components/views/projectViews.scss";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useState } from "react";
+import Popup from "reactjs-popup";
 
 const ProjectsView = () => {
+  const [showPopUp, setShowPopUp] = useState(false);
+
   return (
     <>
       <div className="topWrapper">
@@ -16,7 +20,7 @@ const ProjectsView = () => {
             <Button className="button" variant="outlined">
               Add Project
             </Button>
-            <Button className="button">New Project</Button>
+            <AddNewProject />
           </div>
         </div>
         <div className="textField">
