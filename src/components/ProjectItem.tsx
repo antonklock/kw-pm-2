@@ -14,15 +14,19 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 import { shell } from "electron";
 
-type ChildProps = {
+type ProjectItemProps = {
   handleDelete: (keyToDelete: string) => void;
   id: string;
   path: string;
+  name: string;
+  client: string;
+  starred: boolean;
 };
 
-const ProjectItem = (props: ChildProps) => {
-  const { handleDelete, id, path } = props;
-  const [checked, setChecked] = useState(false);
+const ProjectItem = (props: ProjectItemProps) => {
+  const { handleDelete, id, path, starred, name, client } = props;
+  const [isStarred, setStarred] = useState(starred);
+  // const [checked, setChecked] = useState(false);
 
   const handlePathClick = () => {
     console.log("Path clicked");
@@ -35,17 +39,23 @@ const ProjectItem = (props: ChildProps) => {
           <IconButton
             aria-label="Star project"
             variant="plain"
-            onClick={() => setChecked(!checked)}
+            onClick={() => setStarred(!isStarred)}
           >
-            {checked ? <StarIcon /> : <StarBorderIcon />}
+            {isStarred ? <StarIcon /> : <StarBorderIcon />}
           </IconButton>
         </CardOverflow>
 
         <CardContent className="cardPart">
           <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
-            Project Name
+            {name}
           </Typography>
           <Typography level="body2"> {id} </Typography>
+        </CardContent>
+
+        <CardContent className="cardPart">
+          <Typography fontWeight="md" textColor="plainColor" mb={0.5}>
+            {client}
+          </Typography>
         </CardContent>
 
         <CardContent className="cardPart">

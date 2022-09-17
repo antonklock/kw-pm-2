@@ -1,36 +1,57 @@
 import { useState, useEffect } from "react";
 import ProjectItem from "./ProjectItem";
 import { v4 as uuidv4 } from "uuid";
+// import { projects } from "../data/projectList";
 
-type Card = {
+type Project = {
+  name: string;
+  client: string;
+  path: string;
+  starred: boolean;
   id: string;
 };
 
-const ProjectItems = () => {
-  const [cards, setCards] = useState<Card[]>([]);
+type ProjectItemsProps = {
+  projectItems: Project[];
+  setProjectItems: React.Dispatch<React.SetStateAction<Project[]>>;
+};
 
-  const handleDelete = (cardToDelete: string) => {
-    const filteredCards = cards.filter((card) => card.id !== cardToDelete);
-    setCards(filteredCards);
+const ProjectItems = (props: ProjectItemsProps) => {
+  const { projectItems, setProjectItems } = props;
+
+  const handleDelete = (projectToDelete: string) => {
+    const filteredProjects = projectItems.filter(
+      (project) => project.id !== projectToDelete
+    );
+    setProjectItems(filteredProjects);
   };
 
   useEffect(() => {
-    const newCards: Card[] = [];
-    for (let i = 0; i < 10; i++) {
-      const id = uuidv4();
-      newCards.push({ id });
+    const newProjectList = [];
+    for (let i = 0; i < 5; i++) {
+      const newProject = {
+        id: uuidv4(),
+        name: "Project #" + i,
+        client: "Client #" + i,
+        path: "/Users/antonklock/Desktop",
+        starred: false,
+      };
+      newProjectList.push(newProject);
     }
-    setCards(newCards);
+    setProjectItems(newProjectList);
   }, []);
 
   return (
     <>
-      {cards.map((card) => (
+      {projectItems.map((project) => (
         <ProjectItem
-          key={card.id}
-          id={card.id}
+          key={project.id}
+          id={project.id}
           handleDelete={handleDelete}
-          path={"path/path/path/path"}
+          path={project.path}
+          name={project.name}
+          client={project.client}
+          starred={project.starred}
         />
       ))}
     </>
