@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import ProjectItem from "./ProjectItem";
 import { v4 as uuidv4 } from "uuid";
-// import { projects } from "../data/projectList";
 
 type Project = {
   name: string;
@@ -14,31 +13,27 @@ type Project = {
 type ProjectItemsProps = {
   projectItems: Project[];
   setProjectItems: React.Dispatch<React.SetStateAction<Project[]>>;
+  handleDeleteProject: (projectToDelete: string) => void;
 };
 
 const ProjectItems = (props: ProjectItemsProps) => {
-  const { projectItems, setProjectItems } = props;
-
-  const handleDelete = (projectToDelete: string) => {
-    const filteredProjects = projectItems.filter(
-      (project) => project.id !== projectToDelete
-    );
-    setProjectItems(filteredProjects);
-  };
+  const { projectItems, setProjectItems, handleDeleteProject } = props;
 
   useEffect(() => {
-    const newProjectList = [];
-    for (let i = 0; i < 5; i++) {
-      const newProject = {
-        id: uuidv4(),
-        name: "Project #" + i,
-        client: "Client #" + i,
-        path: "/Users/antonklock/Desktop",
-        starred: false,
-      };
-      newProjectList.push(newProject);
+    if (projectItems.length === 0) {
+      const newProjectList = [];
+      for (let i = 0; i < 5; i++) {
+        const newProject = {
+          id: uuidv4(),
+          name: "Project #" + i,
+          client: "Client #" + i,
+          path: "/Users/antonklock/Desktop",
+          starred: false,
+        };
+        newProjectList.push(newProject);
+      }
+      setProjectItems(newProjectList);
     }
-    setProjectItems(newProjectList);
   }, []);
 
   return (
@@ -47,7 +42,7 @@ const ProjectItems = (props: ProjectItemsProps) => {
         <ProjectItem
           key={project.id}
           id={project.id}
-          handleDelete={handleDelete}
+          handleDeleteProject={handleDeleteProject}
           path={project.path}
           name={project.name}
           client={project.client}

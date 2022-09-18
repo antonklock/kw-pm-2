@@ -15,7 +15,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { shell } from "electron";
 
 type ProjectItemProps = {
-  handleDelete: (keyToDelete: string) => void;
+  handleDeleteProject: (keyToDelete: string) => void;
   id: string;
   path: string;
   name: string;
@@ -24,9 +24,8 @@ type ProjectItemProps = {
 };
 
 const ProjectItem = (props: ProjectItemProps) => {
-  const { handleDelete, id, path, starred, name, client } = props;
+  const { handleDeleteProject, id, path, starred, name, client } = props;
   const [isStarred, setStarred] = useState(starred);
-  // const [checked, setChecked] = useState(false);
 
   const handlePathClick = () => {
     console.log("Path clicked");
@@ -69,7 +68,7 @@ const ProjectItem = (props: ProjectItemProps) => {
           color="danger"
           onClick={() => {
             console.log("id", id);
-            handleDelete(id);
+            handleDeleteProject(id);
           }}
         >
           Delete

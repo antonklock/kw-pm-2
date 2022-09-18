@@ -15,10 +15,11 @@ type Project = {
 type ProjectItemsProps = {
   projectItems: Project[];
   setProjectItems: React.Dispatch<React.SetStateAction<Project[]>>;
+  handleAddNewProject: (newProject: Project) => void;
 };
 
 const AddNewProject = (props: ProjectItemsProps) => {
-  const { projectItems, setProjectItems } = props;
+  const { projectItems, setProjectItems, handleAddNewProject } = props;
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
 
@@ -27,15 +28,15 @@ const AddNewProject = (props: ProjectItemsProps) => {
   let path = "";
   let starred = false;
 
-  const handleAddProject = (
-    name: string,
-    client: string,
-    path: string,
-    starred: boolean,
-    id: string
-  ) => {
-    setProjectItems([...projectItems, { name, client, path, starred, id }]);
-  };
+  // const handleAddProject = (
+  //   name: string,
+  //   client: string,
+  //   path: string,
+  //   starred: boolean,
+  //   id: string
+  // ) => {
+  //   setProjectItems([...projectItems, { name, client, path, starred, id }]);
+  // };
   return (
     <>
       <Button
@@ -82,7 +83,14 @@ const AddNewProject = (props: ProjectItemsProps) => {
           </Box>
           <Button
             onClick={() => {
-              handleAddProject(name, client, path, starred, uuidv4());
+              const newProject = {
+                name,
+                client,
+                path,
+                starred,
+                id: uuidv4(),
+              };
+              handleAddNewProject(newProject);
               closeModal();
             }}
           >

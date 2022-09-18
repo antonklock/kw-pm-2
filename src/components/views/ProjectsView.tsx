@@ -18,6 +18,17 @@ const ProjectsView = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [projectItems, setProjectItems] = useState<Project[]>([]);
 
+  const handleAddNewProject = (newProject: Project) => {
+    setProjectItems([...projectItems, newProject]);
+  };
+
+  const handleDeleteProject = (projectToDelete: string) => {
+    const filteredProjects = projectItems.filter(
+      (project) => project.id !== projectToDelete
+    );
+    setProjectItems(filteredProjects);
+  };
+
   return (
     <>
       <div className="topWrapper">
@@ -32,6 +43,7 @@ const ProjectsView = () => {
             <AddNewProject
               projectItems={projectItems}
               setProjectItems={setProjectItems}
+              handleAddNewProject={handleAddNewProject}
             />
           </div>
         </div>
@@ -57,6 +69,7 @@ const ProjectsView = () => {
         <ProjectItems
           projectItems={projectItems}
           setProjectItems={setProjectItems}
+          handleDeleteProject={handleDeleteProject}
         />
       </div>
     </>
